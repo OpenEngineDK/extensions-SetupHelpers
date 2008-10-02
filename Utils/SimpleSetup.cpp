@@ -41,6 +41,9 @@
 #include <Logging/Logger.h>
 #include <Logging/StreamLogger.h>
 
+// HUD
+#include <Display/HUD.h>
+
 namespace OpenEngine {
 namespace Utils {
 
@@ -105,6 +108,7 @@ SimpleSetup::SimpleSetup(std::string title)
     , viewport(new Viewport(*frame))
     , renderingview(new ExtRenderingView(*viewport))
     , textureloader(new TextureLoader(*renderer))
+    , hud(new HUD())
 {
     // create a logger to std out
     Logger::AddLogger(new StreamLogger(&std::cout));
@@ -130,6 +134,8 @@ SimpleSetup::SimpleSetup(std::string title)
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));
     // bind default keys
     input->KeyEvent().Attach(*(new QuitHandler(*engine)));
+    // setup hud
+    renderer->PostProcessEvent().Attach(*hud);
 }
 
 /**
@@ -261,6 +267,10 @@ void SimpleSetup::SetCamera(IViewingVolume& volume) {
  */
 void SimpleSetup::AddDataDirectory(string dir) {
     DirectoryManager::AppendPath(dir);
+}
+
+HUD& SimpleSetup::GetHUD() const {
+    return *hud;
 }
 
 /**

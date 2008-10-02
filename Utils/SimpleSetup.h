@@ -23,6 +23,7 @@
 #include <Scene/ISceneNode.h>
 #include <Resources/IModelResource.h>
 #include <Resources/ITextureResource.h>
+#include <Display/HUD.h>
 
 // include all the classes that depend on serialization
 #include <Resources/TGAResource.h>
@@ -41,6 +42,7 @@ namespace OpenEngine {
         class IViewingVolume;
         class Frustum;
         class SDLFrame;
+        class HUD;
     }
     namespace Devices {
         class SDLInput;
@@ -101,6 +103,8 @@ public:
     Devices::IKeyboard& GetKeyboard() const;
     Devices::IJoystick& GetJoystick() const;
 
+    Display::HUD& GetHUD() const;
+
     Scene::ISceneNode* GetScene() const;
     void SetScene(Scene::ISceneNode& scene);
 
@@ -138,6 +142,7 @@ private:
     Display::Viewport* viewport;
     Renderers::OpenGL::RenderingView* renderingview;
     Renderers::TextureLoader* textureloader;
+    Display::HUD* hud;
 };
 
 } // NS Utils
