@@ -134,12 +134,12 @@ private:
     std::string title;
     Core::Engine* engine;
     Display::SDLFrame* frame;
+    Display::Viewport* viewport;
     Renderers::OpenGL::Renderer* renderer;
     Devices::SDLInput* input;
     Scene::ISceneNode* scene;
     Display::Camera* camera;
     Display::Frustum* frustum;
-    Display::Viewport* viewport;
     Renderers::OpenGL::RenderingView* renderingview;
     Renderers::TextureLoader* textureloader;
     Display::HUD* hud;
