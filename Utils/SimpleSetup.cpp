@@ -27,6 +27,8 @@
 // OpenGL extension
 #include <Renderers/OpenGL/Renderer.h>
 #include <Renderers/OpenGL/RenderingView.h>
+#include <Renderers/OpenGL/ShaderLoader.h>
+#include <Resources/GLSLResource.h>
 
 // SDL extension
 #include <Display/SDLFrame.h>
@@ -125,6 +127,7 @@ SimpleSetup::SimpleSetup(std::string title)
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
     ResourceManager<ITextureResource>::AddPlugin(new TGAPlugin());
+    ResourceManager<IShaderResource>::AddPlugin(new GLSLPlugin());
     // populate the default scene
     scene->AddNode(new DirectionalLightNode());
     // setup the rendering system
@@ -224,6 +227,10 @@ void SimpleSetup::SetScene(ISceneNode& scene) {
     this->scene = &scene;
     renderer->SetSceneRoot(this->scene);
     textureloader->Load(scene);
+
+    OpenGL::ShaderLoader* shaderLoader =
+        new OpenGL::ShaderLoader(*textureloader, scene);
+    engine->InitializeEvent().Attach(*shaderLoader);
 }
 
 /**
