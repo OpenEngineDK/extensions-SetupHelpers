@@ -10,7 +10,7 @@
 #ifndef _OE_SIMPLE_SETUP_H_
 #define _OE_SIMPLE_SETUP_H_
 
-#include <Meta/Config.h>
+//#include <Meta/Config.h>
 
 // include the main interfaces
 #include <Core/IEngine.h>

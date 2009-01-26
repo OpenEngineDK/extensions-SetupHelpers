@@ -14,7 +14,7 @@ TARGET_LINK_LIBRARIES(Extensions_SetupHelpers
   OpenEngine_Scene
   # extenstions libraries
   Extensions_AccelerationStructures
-  Extensions_ColladaResource
+  # Extensions_ColladaResource
   Extensions_OBJResource
   Extensions_OpenGLRenderer
   Extensions_SDL

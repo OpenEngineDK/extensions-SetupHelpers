@@ -37,7 +37,7 @@
 // Resources extensions
 #include <Resources/OBJResource.h>
 #include <Resources/TGAResource.h>
-#include <Resources/ColladaResource.h>
+//#include <Resources/ColladaResource.h>
 
 // Logging
 #include <Logging/Logger.h>
