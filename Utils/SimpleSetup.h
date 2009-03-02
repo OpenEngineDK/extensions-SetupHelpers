@@ -93,7 +93,7 @@ namespace Utils {
 class SimpleSetup {
 public:
 
-    SimpleSetup(std::string title);
+    SimpleSetup(std::string title, Display::Viewport* vp);
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;

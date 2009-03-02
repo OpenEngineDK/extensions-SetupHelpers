@@ -13,7 +13,6 @@
 #include <Core/Engine.h>
 #include <Display/Camera.h>
 #include <Display/Frustum.h>
-#include <Display/InterpolatedViewingVolume.h>
 #include <Display/ViewingVolume.h>
 #include <Renderers/TextureLoader.h>
 #include <Resources/ResourceManager.h>
@@ -98,15 +97,15 @@ public:
  *
  * @param title Project title
  */
-SimpleSetup::SimpleSetup(std::string title)
+    SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp)
     : title(title)
     , engine(new Engine())
     , frame(new SDLFrame(800,600,32))
-    , viewport(new Viewport(*frame))
+    , viewport(vp)
     , renderer(new Renderer(viewport))
     , input(new SDLInput())
     , scene(new SceneNode())
-    , camera(new Camera(*(new InterpolatedViewingVolume(*(new ViewingVolume())))))
+    , camera(new Camera(*(new ViewingVolume())))
     , frustum(new Frustum(*camera))
     , renderingview(new ExtRenderingView(*viewport))
     , textureloader(new TextureLoader(*renderer))
