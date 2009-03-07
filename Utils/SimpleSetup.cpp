@@ -101,7 +101,6 @@ public:
     : title(title)
     , engine(new Engine())
     , frame(new SDLFrame(800,600,32))
-    , viewport(vp)
     , renderer(new Renderer(viewport))
     , input(new SDLInput())
     , scene(new SceneNode())
@@ -113,6 +112,8 @@ public:
 {
     // create a logger to std out
     Logger::AddLogger(new StreamLogger(&std::cout));
+    // setup a default viewport if non was given
+    viewport = (vp == NULL) ? new Viewport(*frame) : vp;
     // configure modules needing process time
     engine->InitializeEvent().Attach(*frame);
     engine->InitializeEvent().Attach(*renderer);
