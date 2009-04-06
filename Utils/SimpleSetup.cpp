@@ -30,8 +30,7 @@
 #include <Resources/GLSLResource.h>
 
 // SDL extension
-#include <Display/SDLFrame.h>
-#include <Devices/SDLInput.h>
+#include <Display/SDLEnvironment.h>
 
 // Resources extensions
 #include <Resources/OBJResource.h>
@@ -97,47 +96,72 @@ public:
  *
  * @param title Project title
  */
-    SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp)
+SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env)
     : title(title)
-    , engine(new Engine())
-    , frame(new SDLFrame(800,600,32))
-      // setup a default viewport if non was given
-    , viewport((vp == NULL) ? new Viewport(*frame) : vp)
-    , renderer(new Renderer(viewport))
-    , input(new SDLInput())
-    , scene(new SceneNode())
-    , camera(new Camera(*(new ViewingVolume())))
-    , frustum(new Frustum(*camera))
-    , renderingview(new ExtRenderingView(*viewport))
-    , textureloader(new TextureLoader(*renderer))
-    , hud(new HUD())
+    , engine(NULL)
+    , env(NULL)
+    , frame(NULL)
+    , viewport(NULL)
+    , renderer(NULL)
+    , mouse(NULL)
+    , keyboard(NULL)
+    , joystick(NULL)
+    , scene(NULL)
+    , camera(NULL)
+    , frustum(NULL)
+    , renderingview(NULL)
+    , textureloader(NULL)
+    , hud(NULL)
 {
     // create a logger to std out
     Logger::AddLogger(new StreamLogger(&std::cout));
-    // configure modules needing process time
-    engine->InitializeEvent().Attach(*frame);
-    engine->InitializeEvent().Attach(*renderer);
-    engine->InitializeEvent().Attach(*input);
-    engine->ProcessEvent().Attach(*frame);
-    engine->ProcessEvent().Attach(*renderer);
-    engine->ProcessEvent().Attach(*input);
-    engine->DeinitializeEvent().Attach(*frame);
-    engine->DeinitializeEvent().Attach(*renderer);
-    engine->DeinitializeEvent().Attach(*input);
+
+    // setup the engine
+    engine = new Engine();
+
+    // setup display and devices
+    this->env = env = (env == NULL) ? new SDLEnvironment(800,600) : env;
+    frame    = &env->GetFrame();
+    mouse    = env->GetMouse();
+    keyboard = env->GetKeyboard();
+    joystick = env->GetJoystick();
+    engine->InitializeEvent().Attach(*env);
+    engine->ProcessEvent().Attach(*env);
+    engine->DeinitializeEvent().Attach(*env);
+
+    // setup a default viewport and camera
+    viewport = (vp == NULL) ? new Viewport(*frame) : vp;
+    camera  = new Camera(*(new ViewingVolume()));
+    frustum = new Frustum(*camera);
+    viewport->SetViewingVolume(frustum);
+
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
     ResourceManager<ITextureResource>::AddPlugin(new TGAPlugin());
     ResourceManager<IShaderResource>::AddPlugin(new GLSLPlugin());
+
     // populate the default scene
+    scene = new SceneNode();
     scene->AddNode(new DirectionalLightNode());
+
     // setup the rendering system
+    renderer = new Renderer(viewport);
+    textureloader = new TextureLoader(*renderer);
+    renderingview = new RenderingView(*viewport);
+
+    engine->InitializeEvent().Attach(*renderer);
+    engine->ProcessEvent().Attach(*renderer);
+    engine->DeinitializeEvent().Attach(*renderer);
+
     renderer->ProcessEvent().Attach(*renderingview);
     renderer->SetSceneRoot(scene);
-    viewport->SetViewingVolume(frustum);
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));
+
     // bind default keys
-    input->KeyEvent().Attach(*(new QuitHandler(*engine)));
+    keyboard->KeyEvent().Attach(*(new QuitHandler(*engine)));
+
     // setup hud
+    hud = new HUD();
     renderer->PostProcessEvent().Attach(*hud);
 }
 
@@ -178,7 +202,7 @@ IRenderer& SimpleSetup::GetRenderer() const {
  * The mouse structure is not replaceable.
  */
 IMouse& SimpleSetup::GetMouse() const {
-    return *input;
+    return *mouse;
 }
 
 /**
@@ -186,7 +210,7 @@ IMouse& SimpleSetup::GetMouse() const {
  * The keyboard structure is not replaceable.
  */
 IKeyboard& SimpleSetup::GetKeyboard() const {
-    return *input;
+    return *keyboard;
 }
 
 /**
@@ -194,7 +218,7 @@ IKeyboard& SimpleSetup::GetKeyboard() const {
  * The joystick structure is not replaceable.
  */
 IJoystick& SimpleSetup::GetJoystick() const {
-    return *input;
+    return *joystick;
 }
 
 /**

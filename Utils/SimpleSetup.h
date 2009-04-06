@@ -18,7 +18,6 @@
 #include <Devices/IKeyboard.h>
 #include <Devices/IMouse.h>
 #include <Display/Camera.h>
-#include <Display/IFrame.h>
 #include <Renderers/IRenderer.h>
 #include <Scene/ISceneNode.h>
 #include <Resources/IModelResource.h>
@@ -38,14 +37,17 @@ namespace OpenEngine {
         class Engine;
     }
     namespace Display {
+        class IEnvironment;
+        class IFrame;
         class Viewport;
         class IViewingVolume;
         class Frustum;
-        class SDLFrame;
         class HUD;
     }
     namespace Devices {
-        class SDLInput;
+        class IMouse;
+        class IKeyboard;
+        class IJoystick;
     }
     namespace Scene {
         class SceneNode;
@@ -93,7 +95,7 @@ namespace Utils {
 class SimpleSetup {
 public:
 
-    SimpleSetup(std::string title, Display::Viewport* vp=NULL);
+    SimpleSetup(std::string title, Display::Viewport* vp=NULL, Display::IEnvironment* env=NULL);
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;
@@ -133,10 +135,13 @@ public:
 private:
     std::string title;
     Core::Engine* engine;
-    Display::SDLFrame* frame;
+    Display::IEnvironment* env;
+    Display::IFrame* frame;
     Display::Viewport* viewport;
     Renderers::OpenGL::Renderer* renderer;
-    Devices::SDLInput* input;
+    Devices::IMouse* mouse;
+    Devices::IKeyboard* keyboard;
+    Devices::IJoystick* joystick;
     Scene::ISceneNode* scene;
     Display::Camera* camera;
     Display::Frustum* frustum;
