@@ -13,7 +13,7 @@
 #include <Core/Engine.h>
 #include <Display/Camera.h>
 #include <Display/Frustum.h>
-#include <Display/ViewingVolume.h>
+#include <Display/PerspectiveViewingVolume.h>
 #include <Renderers/TextureLoader.h>
 #include <Resources/ResourceManager.h>
 #include <Scene/DirectionalLightNode.h>
@@ -131,7 +131,7 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
 
     // setup a default viewport and camera
     viewport = (vp == NULL) ? new Viewport(*frame) : vp;
-    camera  = new Camera(*(new ViewingVolume()));
+    camera  = new Camera(*(new PerspectiveViewingVolume()));
     frustum = new Frustum(*camera);
     viewport->SetViewingVolume(frustum);
 
