@@ -290,6 +290,17 @@ void SimpleSetup::SetCamera(IViewingVolume& volume) {
 }
 
 /**
+ * Get a texture loader.
+ * This texture loader has already been configured to the rendering
+ * system and is ready for use.
+ *
+ * @return Texture loader.
+ */
+TextureLoader& SimpleSetup::GetTextureLoader() {
+    return *textureloader;
+}
+
+/**
  * Add a data directory to the file search path.
  * This path will be searched when loading file resources.
  * By default we load all the resource plug-ins we can.

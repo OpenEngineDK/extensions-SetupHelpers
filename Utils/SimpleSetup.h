@@ -114,6 +114,8 @@ public:
     void SetCamera(Display::Camera& volume);
     void SetCamera(Display::IViewingVolume& volume);
 
+    Renderers::TextureLoader& GetTextureLoader();
+
     void AddDataDirectory(std::string dir);
 
     void EnableDebugging();
