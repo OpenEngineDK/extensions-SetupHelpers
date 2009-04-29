@@ -27,6 +27,7 @@
 #include <Renderers/OpenGL/Renderer.h>
 #include <Renderers/OpenGL/RenderingView.h>
 #include <Renderers/OpenGL/ShaderLoader.h>
+#include <Renderers/OpenGL/LightRenderer.h>
 #include <Resources/GLSLResource.h>
 
 // SDL extension
@@ -148,11 +149,13 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     renderer = new Renderer(viewport);
     textureloader = new TextureLoader(*renderer);
     renderingview = new RenderingView(*viewport);
+    lightrenderer = new LightRenderer(*viewport->GetViewingVolume());
 
     engine->InitializeEvent().Attach(*renderer);
     engine->ProcessEvent().Attach(*renderer);
     engine->DeinitializeEvent().Attach(*renderer);
 
+    renderer->PreProcessEvent().Attach(*lightrenderer);
     renderer->ProcessEvent().Attach(*renderingview);
     renderer->SetSceneRoot(scene);
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));

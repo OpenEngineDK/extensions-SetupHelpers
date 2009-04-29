@@ -57,6 +57,7 @@ namespace OpenEngine {
         namespace OpenGL {
             class Renderer;
             class RenderingView;
+            class LightRenderer;
         }
     }
 }
@@ -148,6 +149,7 @@ private:
     Display::Camera* camera;
     Display::Frustum* frustum;
     Renderers::OpenGL::RenderingView* renderingview;
+    Renderers::OpenGL::LightRenderer* lightrenderer;
     Renderers::TextureLoader* textureloader;
     Display::HUD* hud;
 };
