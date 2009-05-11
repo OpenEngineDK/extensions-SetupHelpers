@@ -115,7 +115,8 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     , hud(NULL)
 {
     // create a logger to std out
-    Logger::AddLogger(new StreamLogger(&std::cout));
+    stdlog = new StreamLogger(&std::cout);
+    Logger::AddLogger(stdlog);
 
     // setup the engine
     engine = new Engine();
@@ -316,6 +317,10 @@ void SimpleSetup::AddDataDirectory(string dir) {
 
 HUD& SimpleSetup::GetHUD() const {
     return *hud;
+}
+
+ILogger* SimpleSetup::GetLogger() const {
+    return stdlog;
 }
 
 /**

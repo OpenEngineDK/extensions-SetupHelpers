@@ -60,6 +60,9 @@ namespace OpenEngine {
             class LightRenderer;
         }
     }
+    namespace Logging {
+        class ILogger;
+    }
 }
 
 namespace OpenEngine {
@@ -108,6 +111,8 @@ public:
 
     Display::HUD& GetHUD() const;
 
+    Logging::ILogger* GetLogger() const;
+
     Scene::ISceneNode* GetScene() const;
     void SetScene(Scene::ISceneNode& scene);
 
@@ -152,6 +157,7 @@ private:
     Renderers::OpenGL::LightRenderer* lightrenderer;
     Renderers::TextureLoader* textureloader;
     Display::HUD* hud;
+    Logging::ILogger* stdlog;
 };
 
 } // NS Utils
