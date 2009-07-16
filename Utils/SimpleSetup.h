@@ -99,7 +99,10 @@ namespace Utils {
 class SimpleSetup {
 public:
 
-    SimpleSetup(std::string title, Display::Viewport* vp=NULL, Display::IEnvironment* env=NULL);
+    SimpleSetup(std::string title, 
+                Display::Viewport* vp=NULL, 
+                Display::IEnvironment* env=NULL, 
+                Renderers::IRenderingView* rv=NULL);
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;
@@ -153,7 +156,7 @@ private:
     Scene::ISceneNode* scene;
     Display::Camera* camera;
     Display::Frustum* frustum;
-    Renderers::OpenGL::RenderingView* renderingview;
+    Renderers::IRenderingView* renderingview;
     Renderers::OpenGL::LightRenderer* lightrenderer;
     Renderers::TextureLoader* textureloader;
     Display::HUD* hud;

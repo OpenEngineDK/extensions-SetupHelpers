@@ -98,7 +98,7 @@ public:
  *
  * @param title Project title
  */
-SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env)
+SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env, Renderers::IRenderingView* rv)
     : title(title)
     , engine(NULL)
     , env(NULL)
@@ -150,7 +150,7 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     // setup the rendering system
     renderer = new Renderer(viewport);
     textureloader = new TextureLoader(*renderer);
-    renderingview = new RenderingView(*viewport);
+    renderingview = (rv == NULL) ? new RenderingView(*viewport) : rv;
     lightrenderer = new LightRenderer(*viewport->GetViewingVolume());
 
     engine->InitializeEvent().Attach(*renderer);
