@@ -109,7 +109,7 @@ public:
     Devices::IKeyboard& GetKeyboard() const;
     Devices::IJoystick& GetJoystick() const;
 
-    Display::HUD& GetHUD() const;
+    Display::HUD& GetHUD();
 
     Logging::ILogger* GetLogger() const;
 

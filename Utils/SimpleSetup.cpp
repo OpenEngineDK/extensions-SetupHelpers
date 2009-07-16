@@ -44,6 +44,7 @@
 
 // HUD
 #include <Display/HUD.h>
+#include <Utils/FPSSurface.h>
 
 namespace OpenEngine {
 namespace Utils {
@@ -160,13 +161,10 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     renderer->ProcessEvent().Attach(*renderingview);
     renderer->SetSceneRoot(scene);
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));
+    renderer->PreProcessEvent().Attach(*textureloader);
 
     // bind default keys
     keyboard->KeyEvent().Attach(*(new QuitHandler(*engine)));
-
-    // setup hud
-    hud = new HUD();
-    renderer->PostProcessEvent().Attach(*hud);
 }
 
 /**
@@ -315,7 +313,12 @@ void SimpleSetup::AddDataDirectory(string dir) {
     DirectoryManager::AppendPath(dir);
 }
 
-HUD& SimpleSetup::GetHUD() const {
+HUD& SimpleSetup::GetHUD() {
+    if (hud == NULL){
+        // setup hud
+        hud = new HUD();
+        renderer->PostProcessEvent().Attach(*hud);
+    }
     return *hud;
 }
 
@@ -328,9 +331,7 @@ ILogger* SimpleSetup::GetLogger() const {
  * This includes
  * - visualization of the frustum,
  * - export the scene to a dot-graph file (scene.dot)
- * - add FPS to the HUD (not implemented yet)
- *
- * @todo: add cairo fps to the hud
+ * - add FPS to the HUD
  */
 void SimpleSetup::EnableDebugging() {
     // Visualization of the frustum
@@ -352,6 +353,13 @@ void SimpleSetup::EnableDebugging() {
                     << "dot -Tsvg scene.dot > scene.svg"
                     << logger.end;
     }
+
+    // Setup fps counter
+    FPSSurfacePtr fps = FPSSurface::Create();
+    GetTextureLoader().Load(fps, TextureLoader::RELOAD_QUEUED);
+    engine->ProcessEvent().Attach(*fps);
+    HUD::Surface* fpshud = GetHUD().CreateSurface(fps);
+    fpshud->SetPosition(HUD::Surface::LEFT, HUD::Surface::TOP);
 }
 
 } // NS Utils

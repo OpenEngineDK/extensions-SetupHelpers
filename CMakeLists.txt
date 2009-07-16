@@ -20,4 +20,5 @@ TARGET_LINK_LIBRARIES(Extensions_SetupHelpers
   Extensions_SDL
   Extensions_TGAResource
   Extensions_HUD
+  Extensions_CairoResource
 )
