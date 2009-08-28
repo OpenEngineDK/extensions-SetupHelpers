@@ -35,8 +35,6 @@
 
 // Resources extensions
 #include <Resources/OBJResource.h>
-#include <Resources/SDLImage.h>
-//#include <Resources/TGAResource.h>
 //#include <Resources/ColladaResource.h>
 
 // Logging
@@ -142,7 +140,6 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
     ResourceManager<ITextureResource>::AddPlugin(new SDLImagePlugin());
-    //ResourceManager<ITextureResource>::AddPlugin(new TGAPlugin());
     ResourceManager<IShaderResource>::AddPlugin(new GLSLPlugin());
 
     // populate the default scene

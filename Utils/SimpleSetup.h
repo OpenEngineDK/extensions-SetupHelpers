@@ -25,7 +25,7 @@
 #include <Display/HUD.h>
 
 // include all the classes that depend on serialization
-// #include <Resources/TGAResource.h>
+#include <Resources/SDLImage.h>
 // @todo: what about all the scene nodes?
 
 // other std c++ includes
