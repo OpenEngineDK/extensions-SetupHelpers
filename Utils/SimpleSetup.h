@@ -128,6 +128,8 @@ public:
     void AddDataDirectory(std::string dir);
 
     void EnableDebugging();
+    
+    void ShowFPS();
 
     // What about:
     // - HUD.

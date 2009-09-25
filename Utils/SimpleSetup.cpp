@@ -353,13 +353,19 @@ void SimpleSetup::EnableDebugging() {
                     << logger.end;
     }
 
-    // Setup fps counter
-    FPSSurfacePtr fps = FPSSurface::Create();
-    GetTextureLoader().Load(fps, TextureLoader::RELOAD_QUEUED);
-    engine->ProcessEvent().Attach(*fps);
-    HUD::Surface* fpshud = GetHUD().CreateSurface(fps);
-    fpshud->SetPosition(HUD::Surface::LEFT, HUD::Surface::TOP);
+    ShowFPS();
 }
-
+    
+    void SimpleSetup::ShowFPS() {
+        // Setup fps counter
+        FPSSurfacePtr fps = FPSSurface::Create();
+        GetTextureLoader().Load(fps, TextureLoader::RELOAD_QUEUED);
+        engine->ProcessEvent().Attach(*fps);
+        HUD::Surface* fpshud = GetHUD().CreateSurface(fps);
+        fpshud->SetPosition(HUD::Surface::LEFT, HUD::Surface::TOP);
+        
+        
+    }
+    
 } // NS Utils
 } // NS OpenEngine
