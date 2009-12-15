@@ -150,7 +150,7 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     renderer = new Renderer(viewport);
     textureloader = new TextureLoader(*renderer);
     renderingview = (rv == NULL) ? new RenderingView(*viewport) : rv;
-    lightrenderer = new LightRenderer(*viewport->GetViewingVolume());
+    lightrenderer = new LightRenderer(*viewport);
 
     engine->InitializeEvent().Attach(*renderer);
     engine->ProcessEvent().Attach(*renderer);
@@ -275,8 +275,7 @@ void SimpleSetup::SetCamera(Camera& volume) {
     camera = &volume;
     delete frustum;
     frustum = new Frustum(*camera);
-    viewport->SetViewingVolume(frustum);
-    lightrenderer->SetViewingVolume(*frustum);
+    viewport->SetViewingVolume(frustum);    
 }
 /**
  * Set a camera by viewing volume.
