@@ -276,6 +276,7 @@ void SimpleSetup::SetCamera(Camera& volume) {
     delete frustum;
     frustum = new Frustum(*camera);
     viewport->SetViewingVolume(frustum);
+    lightrenderer->SetViewingVolume(*frustum);
 }
 /**
  * Set a camera by viewing volume.
