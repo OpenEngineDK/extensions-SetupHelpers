@@ -16,6 +16,7 @@
 #include <Display/PerspectiveViewingVolume.h>
 #include <Renderers/TextureLoader.h>
 #include <Resources/ResourceManager.h>
+#include <Resources/ITextureResource.h>
 #include <Scene/DirectionalLightNode.h>
 #include <Scene/SceneNode.h>
 

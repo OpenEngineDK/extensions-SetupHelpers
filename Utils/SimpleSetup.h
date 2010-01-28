@@ -21,7 +21,6 @@
 #include <Renderers/IRenderer.h>
 #include <Scene/ISceneNode.h>
 #include <Resources/IModelResource.h>
-#include <Resources/ITextureResource.h>
 #include <Display/HUD.h>
 
 // include all the classes that depend on serialization
