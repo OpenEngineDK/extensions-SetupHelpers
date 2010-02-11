@@ -1,7 +1,7 @@
 # SetupHelpers dependencies
 
 #dist files
-dist /extensions/CairoResource/CairoResource.dist http://openengine.dk/code/extensions/CairoResource/CairoResource.dist
+dist /extensions/HUD/HUD.dist http://openengine.dk/code/extensions/HUD/HUD.dist
 
 darcs /extensions/SDL                     http://openengine.dk/code/extensions/SDL
 darcs /extensions/OpenGLRenderer          http://openengine.dk/code/extensions/OpenGLRenderer
