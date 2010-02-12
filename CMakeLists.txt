@@ -18,5 +18,6 @@ TARGET_LINK_LIBRARIES(Extensions_SetupHelpers
   Extensions_OBJResource
   Extensions_OpenGLRenderer
   Extensions_SDLImage
+  Extensions_SDL # Needed for default env.
   Extensions_HUD
 )
