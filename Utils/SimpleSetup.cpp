@@ -16,7 +16,7 @@
 #include <Display/PerspectiveViewingVolume.h>
 #include <Renderers/TextureLoader.h>
 #include <Resources/ResourceManager.h>
-#include <Resources/ITextureResource.h>
+#include <Resources/ITexture2D.h>
 #include <Scene/DirectionalLightNode.h>
 #include <Scene/SceneNode.h>
 
@@ -140,7 +140,7 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
 
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
-    ResourceManager<ITextureResource>::AddPlugin(new SDLImagePlugin());
+    ResourceManager<ITexture2D>::AddPlugin(new SDLImagePlugin());
     ResourceManager<IShaderResource>::AddPlugin(new GLSLPlugin());
 
     // populate the default scene
