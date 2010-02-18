@@ -101,7 +101,8 @@ public:
     SimpleSetup(std::string title, 
                 Display::Viewport* vp=NULL, 
                 Display::IEnvironment* env=NULL, 
-                Renderers::IRenderingView* rv=NULL);
+                Renderers::IRenderingView* rv=NULL,
+                Core::IEngine* eng=NULL);
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;
@@ -146,7 +147,7 @@ public:
 
 private:
     std::string title;
-    Core::Engine* engine;
+    Core::IEngine* engine;
     Display::IEnvironment* env;
     Display::IFrame* frame;
     Display::Viewport* viewport;

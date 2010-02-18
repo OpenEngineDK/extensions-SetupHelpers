@@ -98,7 +98,7 @@ public:
  *
  * @param title Project title
  */
-SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env, Renderers::IRenderingView* rv)
+    SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env, Renderers::IRenderingView* rv, Core::IEngine* eng)
     : title(title)
     , engine(NULL)
     , env(NULL)
@@ -120,7 +120,7 @@ SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnv
     Logger::AddLogger(stdlog);
 
     // setup the engine
-    engine = new Engine();
+    engine = (eng==NULL)?new Engine():eng;
 
     // setup display and devices
     this->env = env = (env == NULL) ? new SDLEnvironment(800,600) : env;
