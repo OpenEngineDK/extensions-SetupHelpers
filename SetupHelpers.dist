@@ -3,16 +3,18 @@
 #dist files
 dist /extensions/HUD/HUD.dist http://openengine.dk/code/extensions/HUD/HUD.dist
 
-darcs /extensions/OpenGLRenderer          http://openengine.dk/code/extensions/OpenGLRenderer
-darcs /extensions/SDLImage                http://openengine.dk/code/extensions/SDLImage
-darcs /extensions/OBJResource             http://openengine.dk/code/extensions/OBJResource
-darcs /extensions/HUD                     http://openengine.dk/code/extensions/HUD
-darcs /extensions/AccelerationStructures  http://openengine.dk/code/extensions/AccelerationStructures
+darcs /extensions/SetupHelpers			http://openengine.dk/code/extensions/SetupHelpers
+darcs /extensions/OpenGLRenderer		http://openengine.dk/code/extensions/OpenGLRenderer
+darcs /extensions/SDLImage			http://openengine.dk/code/extensions/SDLImage
+darcs /extensions/OBJResource			http://openengine.dk/code/extensions/OBJResource
+darcs /extensions/HUD				http://openengine.dk/code/extensions/HUD
+darcs /extensions/AccelerationStructures	http://openengine.dk/code/extensions/AccelerationStructures
 
-darcs-dev /extensions/OpenGLRenderer          fh.daimi.au.dk:/users/cgd/code/extensions/OpenGLRenderer
-darcs-dev /extensions/SDLImage                fh.daimi.au.dk:/users/cgd/code/extensions/SDLImage
-darcs-dev /extensions/OBJResource             fh.daimi.au.dk:/users/cgd/code/extensions/OBJResource
-darcs-dev /extensions/HUD	              fh.daimi.au.dk:/users/cgd/code/extensions/HUD
-darcs-dev /extensions/AccelerationStructures  fh.daimi.au.dk:/users/cgd/code/extensions/AccelerationStructures
+darcs-dev /extensions/SetupHelpers		fh.daimi.au.dk:/users/cgd/code/extensions/SetupHelpers
+darcs-dev /extensions/OpenGLRenderer		fh.daimi.au.dk:/users/cgd/code/extensions/OpenGLRenderer
+darcs-dev /extensions/SDLImage			fh.daimi.au.dk:/users/cgd/code/extensions/SDLImage
+darcs-dev /extensions/OBJResource		fh.daimi.au.dk:/users/cgd/code/extensions/OBJResource
+darcs-dev /extensions/HUD			fh.daimi.au.dk:/users/cgd/code/extensions/HUD
+darcs-dev /extensions/AccelerationStructures	fh.daimi.au.dk:/users/cgd/code/extensions/AccelerationStructures
 
 
