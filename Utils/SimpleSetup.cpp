@@ -29,7 +29,8 @@
 #include <Renderers/OpenGL/RenderingView.h>
 #include <Renderers/OpenGL/ShaderLoader.h>
 #include <Renderers/OpenGL/LightRenderer.h>
-#include <Resources/GLSLResource.h>
+//#include <Resources/GLSLResource.h>
+#include <Resources/OpenGLShader.h>
 
 // SDL extension
 #include <Display/SDLEnvironment.h>
@@ -141,7 +142,7 @@ public:
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
     ResourceManager<ITexture2D>::AddPlugin(new SDLImagePlugin());
-    ResourceManager<IShaderResource>::AddPlugin(new GLSLPlugin());
+    ResourceManager<IShaderResource>::AddPlugin(new GLShaderPlugin());
 
     // populate the default scene
     scene = new SceneNode();
