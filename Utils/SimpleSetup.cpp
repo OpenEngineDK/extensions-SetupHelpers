@@ -99,7 +99,12 @@ public:
  *
  * @param title Project title
  */
-    SimpleSetup::SimpleSetup(std::string title, Display::Viewport* vp, Display::IEnvironment* env, Renderers::IRenderingView* rv, Core::IEngine* eng)
+    SimpleSetup::SimpleSetup(std::string title, 
+                             Display::Viewport* vp, 
+                             Display::IEnvironment* env, 
+                             Renderers::IRenderingView* rv, 
+                             Core::IEngine* eng,
+                             Renderers::IRenderer* rend)
     : title(title)
     , engine(NULL)
     , env(NULL)
@@ -149,7 +154,8 @@ public:
     scene->AddNode(new DirectionalLightNode());
 
     // setup the rendering system
-    renderer = new Renderer(viewport);
+    
+    renderer = (rend?rend:new Renderer(viewport));
     textureloader = new TextureLoader(*renderer);
     renderingview = (rv == NULL) ? new RenderingView(*viewport) : rv;
     lightrenderer = new LightRenderer(*viewport);

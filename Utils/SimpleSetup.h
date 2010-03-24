@@ -102,7 +102,8 @@ public:
                 Display::Viewport* vp=NULL, 
                 Display::IEnvironment* env=NULL, 
                 Renderers::IRenderingView* rv=NULL,
-                Core::IEngine* eng=NULL);
+                Core::IEngine* eng=NULL,
+                Renderers::IRenderer* rend=NULL);
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;
@@ -122,6 +123,7 @@ public:
     Display::Camera* GetCamera() const;
     void SetCamera(Display::Camera& volume);
     void SetCamera(Display::IViewingVolume& volume);
+
 
     Renderers::TextureLoader& GetTextureLoader();
 
@@ -151,7 +153,8 @@ private:
     Display::IEnvironment* env;
     Display::IFrame* frame;
     Display::Viewport* viewport;
-    Renderers::OpenGL::Renderer* renderer;
+    //Renderers::OpenGL::Renderer* renderer;
+    Renderers::IRenderer* renderer;
     Devices::IMouse* mouse;
     Devices::IKeyboard* keyboard;
     Devices::IJoystick* joystick;
