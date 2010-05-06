@@ -35,6 +35,8 @@
 // SDL extension
 #include <Display/SDLEnvironment.h>
 
+#include <Display/OpenGL/RenderCanvas.h>
+
 // Resources extensions
 #include <Resources/OBJResource.h>
 //#include <Resources/ColladaResource.h>
@@ -53,6 +55,7 @@ namespace Utils {
 using namespace Core;
 using namespace Devices;
 using namespace Display;
+    using namespace Display::OpenGL;
 using namespace Logging;
 using namespace Renderers::OpenGL;
 using namespace Renderers;
@@ -63,10 +66,9 @@ class ExtRenderingView
     : public RenderingView
     , public AcceleratedRenderingView {
 public:
-    ExtRenderingView(Viewport& viewport)
-        : IRenderingView(viewport)
-        , RenderingView(viewport)
-        , AcceleratedRenderingView(viewport) {}
+    ExtRenderingView() 
+        : RenderingView()
+        , AcceleratedRenderingView() {}
 };
 
 class TextureLoadOnInit
@@ -75,8 +77,8 @@ class TextureLoadOnInit
 public:
     TextureLoadOnInit(TextureLoader& tl) : tl(tl) { }
     void Handle(RenderingEventArg arg) {
-        if (arg.renderer.GetSceneRoot() != NULL)
-            tl.Load(*arg.renderer.GetSceneRoot());
+        if (arg.canvas.GetScene() != NULL)
+            tl.Load(*arg.canvas.GetScene());
     }
 };
 
@@ -100,7 +102,6 @@ public:
  * @param title Project title
  */
     SimpleSetup::SimpleSetup(std::string title, 
-                             Display::Viewport* vp, 
                              Display::IEnvironment* env, 
                              Renderers::IRenderingView* rv, 
                              Core::IEngine* eng,
@@ -109,7 +110,7 @@ public:
     , engine(NULL)
     , env(NULL)
     , frame(NULL)
-    , viewport(NULL)
+    , canvas(NULL)
     , renderer(NULL)
     , mouse(NULL)
     , keyboard(NULL)
@@ -130,7 +131,7 @@ public:
 
     // setup display and devices
     this->env = env = (env == NULL) ? new SDLEnvironment(800,600) : env;
-    frame    = &env->GetFrame();
+    frame    = &env->CreateFrame();
     mouse    = env->GetMouse();
     keyboard = env->GetKeyboard();
     joystick = env->GetJoystick();
@@ -139,10 +140,12 @@ public:
     engine->DeinitializeEvent().Attach(*env);
 
     // setup a default viewport and camera
-    viewport = (vp == NULL) ? new Viewport(*frame) : vp;
     camera  = new Camera(*(new PerspectiveViewingVolume()));
     frustum = new Frustum(*camera);
-    viewport->SetViewingVolume(frustum);
+    canvas = new RenderCanvas();
+    canvas->SetViewingVolume(frustum);
+    
+    //viewport->SetViewingVolume(frustum);
 
     // add plug-ins
     ResourceManager<IModelResource>::AddPlugin(new OBJPlugin());
@@ -155,20 +158,25 @@ public:
 
     // setup the rendering system
     
-    renderer = (rend?rend:new Renderer(viewport));
+    renderer = (rend?rend:new Renderer());
     textureloader = new TextureLoader(*renderer);
-    renderingview = (rv == NULL) ? new RenderingView(*viewport) : rv;
-    lightrenderer = new LightRenderer(*viewport);
+    canvas->SetRenderer(renderer);
+    renderingview = (rv == NULL) ? new RenderingView() : rv;
+    lightrenderer = new LightRenderer();
 
-    engine->InitializeEvent().Attach(*renderer);
-    engine->ProcessEvent().Attach(*renderer);
-    engine->DeinitializeEvent().Attach(*renderer);
 
     renderer->PreProcessEvent().Attach(*lightrenderer);
     renderer->ProcessEvent().Attach(*renderingview);
-    renderer->SetSceneRoot(scene);
+    canvas->SetScene(scene);
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));
     renderer->PreProcessEvent().Attach(*textureloader);
+
+    frame->SetCanvas(canvas);
+
+    engine->InitializeEvent().Attach(*frame);
+    engine->ProcessEvent().Attach(*frame);
+    engine->DeinitializeEvent().Attach(*frame);
+
 
     // bind default keys
     keyboard->KeyEvent().Attach(*(new QuitHandler(*engine)));
@@ -258,11 +266,11 @@ ISceneNode* SimpleSetup::GetScene() const {
  */
 void SimpleSetup::SetScene(ISceneNode& scene) {
     this->scene = &scene;
-    renderer->SetSceneRoot(this->scene);
+    canvas->SetScene(this->scene);
     textureloader->Load(scene);
 
-    OpenGL::ShaderLoader* shaderLoader =
-        new OpenGL::ShaderLoader(*textureloader, scene);
+    Renderers::OpenGL::ShaderLoader* shaderLoader =
+        new Renderers::OpenGL::ShaderLoader(*textureloader, scene);
     engine->InitializeEvent().Attach(*shaderLoader);
 }
 
@@ -283,7 +291,7 @@ void SimpleSetup::SetCamera(Camera& volume) {
     camera = &volume;
     delete frustum;
     frustum = new Frustum(*camera);
-    viewport->SetViewingVolume(frustum);    
+    canvas->SetViewingVolume(frustum);    
 }
 /**
  * Set a camera by viewing volume.
@@ -295,7 +303,7 @@ void SimpleSetup::SetCamera(Camera& volume) {
  */
 void SimpleSetup::SetCamera(IViewingVolume& volume) {
     camera = new Camera(volume);
-    viewport->SetViewingVolume(camera);
+    canvas->SetViewingVolume(camera);
 }
 
 /**

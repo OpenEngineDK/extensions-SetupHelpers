@@ -19,6 +19,7 @@
 #include <Devices/IMouse.h>
 #include <Display/Camera.h>
 #include <Renderers/IRenderer.h>
+#include <Renderers/IRenderingView.h>
 #include <Scene/ISceneNode.h>
 #include <Resources/IModelResource.h>
 #include <Display/HUD.h>
@@ -38,7 +39,7 @@ namespace OpenEngine {
     namespace Display {
         class IEnvironment;
         class IFrame;
-        class Viewport;
+        class IRenderCanvas;
         class IViewingVolume;
         class Frustum;
         class HUD;
@@ -99,7 +100,6 @@ class SimpleSetup {
 public:
 
     SimpleSetup(std::string title, 
-                Display::Viewport* vp=NULL, 
                 Display::IEnvironment* env=NULL, 
                 Renderers::IRenderingView* rv=NULL,
                 Core::IEngine* eng=NULL,
@@ -152,7 +152,7 @@ private:
     Core::IEngine* engine;
     Display::IEnvironment* env;
     Display::IFrame* frame;
-    Display::Viewport* viewport;
+    Display::IRenderCanvas* canvas;
     //Renderers::OpenGL::Renderer* renderer;
     Renderers::IRenderer* renderer;
     Devices::IMouse* mouse;
