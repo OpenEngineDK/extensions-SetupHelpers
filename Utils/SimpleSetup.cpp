@@ -69,6 +69,11 @@ public:
     ExtRenderingView() 
         : RenderingView()
         , AcceleratedRenderingView() {}
+    
+    virtual void Handle(RenderingEventArg arg){
+        AcceleratedRenderingView::Handle(arg);
+        RenderingView::Handle(arg);
+    }
 };
 
 class TextureLoadOnInit
