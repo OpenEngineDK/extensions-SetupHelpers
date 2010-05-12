@@ -14,6 +14,7 @@
 
 // include the main interfaces
 #include <Core/IEngine.h>
+#include <Core/Engine.h>
 #include <Devices/IJoystick.h>
 #include <Devices/IKeyboard.h>
 #include <Devices/IMouse.h>
@@ -107,6 +108,7 @@ public:
 
     Core::IEngine& GetEngine() const;
     Display::IFrame& GetFrame() const;
+    Display::IRenderCanvas* GetCanvas() const;
     Renderers::IRenderer& GetRenderer() const;
 
     Devices::IMouse&    GetMouse() const;

@@ -55,7 +55,7 @@ namespace Utils {
 using namespace Core;
 using namespace Devices;
 using namespace Display;
-    using namespace Display::OpenGL;
+using namespace Display::OpenGL;
 using namespace Logging;
 using namespace Renderers::OpenGL;
 using namespace Renderers;
@@ -71,7 +71,7 @@ public:
         , AcceleratedRenderingView() {}
     
     virtual void Handle(RenderingEventArg arg){
-        AcceleratedRenderingView::Handle(arg);
+        AcceleratedRenderingView::SetViewingVolume(arg.canvas.GetViewingVolume());
         RenderingView::Handle(arg);
     }
 };
@@ -135,7 +135,7 @@ public:
     engine = (eng==NULL)?new Engine():eng;
 
     // setup display and devices
-    this->env = env = (env == NULL) ? new SDLEnvironment(800,600) : env;
+    this->env = env = (env == NULL) ? new SDLEnvironment(1280,1024, 32, FRAME_FULLSCREEN) : env;
     frame    = &env->CreateFrame();
     mouse    = env->GetMouse();
     keyboard = env->GetKeyboard();
@@ -166,7 +166,8 @@ public:
     renderer = (rend?rend:new Renderer());
     textureloader = new TextureLoader(*renderer);
     canvas->SetRenderer(renderer);
-    renderingview = (rv == NULL) ? new RenderingView() : rv;
+    // renderingview = (rv == NULL) ? new RenderingView() : rv;
+    renderingview = (rv == NULL) ? new ExtRenderingView() : rv;
     lightrenderer = new LightRenderer();
 
 
@@ -206,6 +207,11 @@ IEngine& SimpleSetup::GetEngine() const {
 IFrame& SimpleSetup::GetFrame() const {
     return *frame;
 }
+
+IRenderCanvas* SimpleSetup::GetCanvas() const {
+    return canvas;
+}
+
 
 /**
  * Get the renderer.
