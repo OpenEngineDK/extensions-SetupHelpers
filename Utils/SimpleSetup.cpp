@@ -179,9 +179,12 @@ public:
 
     frame->SetCanvas(canvas);
 
-    engine->InitializeEvent().Attach(*frame);
-    engine->ProcessEvent().Attach(*frame);
-    engine->DeinitializeEvent().Attach(*frame);
+    /* The environment is resposible for sending these events.
+     * - WILL BE CHANGED IN THE FUTURE
+     */ 
+    // engine->InitializeEvent().Attach(*frame);
+    // engine->ProcessEvent().Attach(*frame);
+    // engine->DeinitializeEvent().Attach(*frame);
 
 
     // bind default keys
