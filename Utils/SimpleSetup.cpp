@@ -135,7 +135,8 @@ public:
     engine = (eng==NULL)?new Engine():eng;
 
     // setup display and devices
-    this->env = env = (env == NULL) ? new SDLEnvironment(1280,1024, 32, FRAME_FULLSCREEN) : env;
+    this->env = env = (env == NULL) ? new SDLEnvironment(1024,768, 32) : env;
+
     frame    = &env->CreateFrame();
     mouse    = env->GetMouse();
     keyboard = env->GetKeyboard();
