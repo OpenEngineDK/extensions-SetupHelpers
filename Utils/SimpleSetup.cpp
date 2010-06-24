@@ -174,6 +174,7 @@ public:
 
     renderer->PreProcessEvent().Attach(*lightrenderer);
     renderer->ProcessEvent().Attach(*renderingview);
+    renderer->InitializeEvent().Attach(*renderingview);
     canvas->SetScene(scene);
     renderer->InitializeEvent().Attach(*(new TextureLoadOnInit(*textureloader)));
     renderer->PreProcessEvent().Attach(*textureloader);
