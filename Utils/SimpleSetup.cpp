@@ -44,6 +44,7 @@
 // Logging
 #include <Logging/Logger.h>
 #include <Logging/StreamLogger.h>
+#include <Logging/ColorStreamLogger.h>
 
 // HUD
 #include <Display/HUD.h>
@@ -127,8 +128,9 @@ public:
     , textureloader(NULL)
     , hud(NULL)
 {
-    // create a logger to std out
-    stdlog = new StreamLogger(&std::cout);
+    // create a logger to std out    
+    stdlog = new ColorStreamLogger(&std::cout);
+    //stdlog = new StreamLogger(&std::cout);
     Logger::AddLogger(stdlog);
 
     // setup the engine
