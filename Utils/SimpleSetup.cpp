@@ -35,7 +35,8 @@
 // SDL extension
 #include <Display/SDLEnvironment.h>
 
-#include <Display/OpenGL/RenderCanvas.h>
+#include <Display/RenderCanvas.h>
+#include <Display/OpenGL/TextureCopy.h>
 
 // Resources extensions
 #include <Resources/OBJResource.h>
@@ -150,7 +151,7 @@ public:
     // setup a default viewport and camera
     camera  = new Camera(*(new PerspectiveViewingVolume()));
     frustum = new Frustum(*camera);
-    canvas = new RenderCanvas();
+    canvas = new RenderCanvas(new TextureCopy());
     canvas->SetViewingVolume(frustum);
     
     //viewport->SetViewingVolume(frustum);
