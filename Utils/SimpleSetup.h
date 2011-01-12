@@ -59,6 +59,7 @@ namespace OpenEngine {
             class Renderer;
             class RenderingView;
             class LightRenderer;
+            class ShaderLoader;
         }
     }
     namespace Logging {
@@ -110,6 +111,10 @@ public:
     Display::IFrame& GetFrame() const;
     Display::IRenderCanvas* GetCanvas() const;
     Renderers::IRenderer& GetRenderer() const;
+    
+    // temporary hack ... remove next two methods when animation branch has been merged with main branch
+    Renderers::OpenGL::LightRenderer* GetLightRenderer() const { return lightrenderer; };
+    Renderers::OpenGL::ShaderLoader* GetShaderLoader() const { return shaderloader; };
 
     Devices::IMouse&    GetMouse() const;
     Devices::IKeyboard& GetKeyboard() const;
@@ -165,6 +170,7 @@ private:
     Display::Frustum* frustum;
     Renderers::IRenderingView* renderingview;
     Renderers::OpenGL::LightRenderer* lightrenderer;
+    Renderers::OpenGL::ShaderLoader* shaderloader;
     Renderers::TextureLoader* textureloader;
     Display::HUD* hud;
     Logging::ILogger* stdlog;
