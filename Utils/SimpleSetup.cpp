@@ -289,7 +289,7 @@ void SimpleSetup::SetScene(ISceneNode& scene) {
     textureloader->Load(scene);
 
     shaderloader = new Renderers::OpenGL::ShaderLoader(*textureloader, scene);
-    engine->InitializeEvent().Attach(*shaderloader);
+    //engine->InitializeEvent().Attach(*shaderloader);
 }
 
 /**
