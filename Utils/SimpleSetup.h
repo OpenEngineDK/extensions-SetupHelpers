@@ -112,10 +112,6 @@ public:
     Display::IRenderCanvas* GetCanvas() const;
     Renderers::IRenderer& GetRenderer() const;
     
-    // temporary hack ... remove next two methods when animation branch has been merged with main branch
-    Renderers::OpenGL::LightRenderer* GetLightRenderer() const { return lightrenderer; };
-    Renderers::OpenGL::ShaderLoader* GetShaderLoader() const { return shaderloader; };
-
     Devices::IMouse&    GetMouse() const;
     Devices::IKeyboard& GetKeyboard() const;
     Devices::IJoystick& GetJoystick() const;
