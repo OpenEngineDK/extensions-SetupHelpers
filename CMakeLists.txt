@@ -20,4 +20,5 @@ TARGET_LINK_LIBRARIES(Extensions_SetupHelpers
   Extensions_SDLImage
   Extensions_SDL # Needed for default env.
   Extensions_HUD
+  Extensions_CairoResource
 )
