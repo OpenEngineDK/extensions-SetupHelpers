@@ -9,11 +9,6 @@ dist /extensions/HUD/HUD.dist http://openengine.dk/code/extensions/HUD/HUD.dist
 dist /extensions/SDL/SDL.dist http://openengine.dk/code/extensions/SDL/SDL.dist
 dist /extensions/SDLImage/SDLImage.dist http://openengine.dk/code/extensions/SDLImage/SDLImage.dist
 dist /extensions/OpenGLRenderer/OpenGLRenderer.dist http://openengine.dk/code/extensions/OpenGLRenderer/OpenGLRenderer.dist
-
-# Old style pull
-darcs /extensions/OBJResource			http://openengine.dk/code/extensions/OBJResource
-darcs /extensions/AccelerationStructures	http://openengine.dk/code/extensions/AccelerationStructures
-
-darcs-dev /extensions/OBJResource		fh.daimi.au.dk:/users/cgd/code/extensions/OBJResource
-darcs-dev /extensions/AccelerationStructures	fh.daimi.au.dk:/users/cgd/code/extensions/AccelerationStructures
+dist /extensions/OBJResource/OBJResource.dist http://openengine.dk/code/extensions/OBJResource/OBJResource.dist
+dist /extensions/AccelerationStructures/AccelerationStructures.dist http://openengine.dk/code/extensions/AccelerationStructures/AccelerationStructures.dist
 
