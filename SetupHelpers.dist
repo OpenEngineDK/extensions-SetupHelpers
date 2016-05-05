@@ -1,7 +1,7 @@
 # SetupHelpers.dist
 # Pull self
 darcs /extensions/SetupHelpers			http://openengine.dk/code/extensions/SetupHelpers
-darcs-dev /extensions/SetupHelpers		fh.daimi.au.dk:/users/cgd/code/extensions/SetupHelpers
+git-dev /extensions/SetupHelpers		git@github.com:OpenEngineDK/extensions-SetupHelpers.git
 
 # SetupHelpers dependencies
 # Pull by dist files
