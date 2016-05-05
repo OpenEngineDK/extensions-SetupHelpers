@@ -5,10 +5,10 @@ darcs-dev /extensions/SetupHelpers		fh.daimi.au.dk:/users/cgd/code/extensions/Se
 
 # SetupHelpers dependencies
 # Pull by dist files
-dist /extensions/HUD/HUD.dist http://openengine.dk/code/extensions/HUD/HUD.dist
-dist /extensions/SDL/SDL.dist http://openengine.dk/code/extensions/SDL/SDL.dist
-dist /extensions/SDLImage/SDLImage.dist http://openengine.dk/code/extensions/SDLImage/SDLImage.dist
-dist /extensions/OpenGLRenderer/OpenGLRenderer.dist http://openengine.dk/code/extensions/OpenGLRenderer/OpenGLRenderer.dist
-dist /extensions/OBJResource/OBJResource.dist http://openengine.dk/code/extensions/OBJResource/OBJResource.dist
-dist /extensions/AccelerationStructures/AccelerationStructures.dist http://openengine.dk/code/extensions/AccelerationStructures/AccelerationStructures.dist
+dist /extensions/HUD/HUD.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-HUD/master/HUD.dist
+dist /extensions/SDL/SDL.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-SDL/master/SDL.dist
+dist /extensions/SDLImage/SDLImage.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-SDLImage/master/SDLImage.dist
+dist /extensions/OpenGLRenderer/OpenGLRenderer.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-OpenGLRenderer/master/OpenGLRenderer.dist
+dist /extensions/OBJResource/OBJResource.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-OBJResource/master/OBJResource.dist
+dist /extensions/AccelerationStructures/AccelerationStructures.dist https://raw.githubusercontent.com/OpenEngineDK/extensions-AccelerationStructures/master/AccelerationStructures.dist
 
